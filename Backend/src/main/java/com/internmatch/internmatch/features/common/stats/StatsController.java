@@ -24,4 +24,9 @@ public class StatsController {
     public ResponseEntity<Map<String, Object>> getEmployerInterest() {
         return ResponseEntity.ok(statsService.getEmployerInterest());
     }
+
+    @GetMapping("/market-overview")
+    public ResponseEntity<Map<String, Object>> getMarketOverview() {
+        return ResponseEntity.ok(statsService.getMarketOverview());
+    }
 }

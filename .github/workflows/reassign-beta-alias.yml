@@ -1,0 +1,87 @@
+name: Pin beta alias
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-beta-alias-pin
+
+jobs:
+  pin:
+    name: Point internmatch-beta.vercel.app at production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Assign the beta alias to the new production deployment
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          ALIAS="internmatch-beta.vercel.app"
+          PROJECT_ID="prj_zRKMnVJR26X6wzsDhr3LJO8QH4FI"
+          TEAM_ID="team_9HxxME7EQrj8WRedJ8LcEf5W"
+          TARGET_SHA="${GITHUB_SHA}"
+          BASE="https://api.vercel.com"
+
+          pin() {
+            curl -sf -X POST \
+              -H "Authorization: Bearer ${VERCEL_TOKEN}" \
+              -H "Content-Type: application/json" \
+              -d "{\"alias\":\"${ALIAS}\"}" \
+              "${BASE}/v2/deployments/$1/aliases"
+          }
+
+          FOUND=""
+          for i in $(seq 1 90); do
+            DEPLOYMENTS=$(curl -sf \
+              -H "Authorization: Bearer ${VERCEL_TOKEN}" \
+              "${BASE}/v6/deployments?projectId=${PROJECT_ID}&teamId=${TEAM_ID}&limit=30")
+
+            FOUND=$(echo "${DEPLOYMENTS}" | jq -r --arg sha "${TARGET_SHA}" \
+              '[.deployments[]
+                | select(.target == "production")
+                | select(.state == "READY")
+                | select(.meta.githubCommitSha == $sha)]
+               | sort_by(.created) | reverse | .[0].uid // empty')
+
+            if [ -n "${FOUND}" ]; then
+              echo "Pinning ${ALIAS} to deployment ${FOUND} (commit ${TARGET_SHA})"
+              pin "${FOUND}"
+              echo "Pinned successfully."
+              exit 0
+            fi
+
+            echo "[${i}/90] No READY production deployment for ${TARGET_SHA} yet - waiting..."
+            sleep 10
+          done
+
+          for i in $(seq 1 30); do
+            DEPLOYMENTS=$(curl -sf \
+              -H "Authorization: Bearer ${VERCEL_TOKEN}" \
+              "${BASE}/v6/deployments?projectId=${PROJECT_ID}&teamId=${TEAM_ID}&limit=30")
+
+            FOUND=$(echo "${DEPLOYMENTS}" | jq -r \
+              '[.deployments[]
+                | select(.target == "production")
+                | select(.state == "READY")]
+               | sort_by(.created) | reverse | .[0].uid // empty')
+
+            if [ -n "${FOUND}" ]; then
+              echo "Fallback: pinning ${ALIAS} to latest READY production deployment ${FOUND}"
+              pin "${FOUND}"
+              echo "Pinned successfully."
+              exit 0
+            fi
+
+            echo "[${i}/30] No READY production deployment yet - waiting..."
+            sleep 10
+          done
+
+          echo "Timed out waiting for a READY production deployment." >&2
+          exit 1

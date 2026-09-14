@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import "../styles/home.css";
 import Navbar from "../components/Navbar";
@@ -26,6 +26,154 @@ function getRoleDashboard(role) {
   if (role === "ADMIN") return "/dashboard/admin";
   return "/dashboard/student";
 }
+
+function DashboardMockup() {
+  return (
+    <div className="landing-mockup">
+      <svg
+        viewBox="0 0 600 470"
+        role="img"
+        aria-label="Preview of the InternMatch student dashboard: a profile completion bar, three applications with Pending, Interview, and Offered statuses, and a weekly summary."
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>Preview of the InternMatch student dashboard</title>
+        <rect width="600" height="470" fill="#12161c" />
+
+        <rect width="600" height="46" fill="#161b22" />
+        <circle cx="26" cy="23" r="5" fill="#2a3139" />
+        <circle cx="44" cy="23" r="5" fill="#2a3139" />
+        <circle cx="62" cy="23" r="5" fill="#2a3139" />
+        <text x="86" y="29" fill="#9aa3ad" font-family="Sora, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="0.2">InternMatch · Student Portal</text>
+
+        <text x="32" y="86" fill="#edeae3" font-family="Sora, Arial, sans-serif" font-size="14" font-weight="700">Applications</text>
+        <text x="566" y="86" text-anchor="end" fill="#9aa3ad" font-family="Arial, sans-serif" font-size="12">2 new this week</text>
+
+        <g font-family="Arial, sans-serif">
+          <rect x="28" y="102" width="544" height="74" rx="12" fill="#1a1f26" stroke="#252b33" />
+          <rect x="46" y="116" width="34" height="34" rx="8" fill="#2a3139" />
+          <text x="63" y="138" text-anchor="middle" fill="#ff6b4a" font-size="12" font-weight="700" font-family="Sora, Arial, sans-serif">AC</text>
+          <text x="92" y="136" fill="#edeae3" font-size="14.5" font-weight="600">Software Engineering Intern</text>
+          <text x="92" y="154" fill="#9aa3ad" font-size="12">ACME Corp · Remote · PHP 50,000/mo</text>
+          <rect x="452" y="116" width="104" height="22" rx="11" fill="#ffffff14" stroke="#ffffff29" />
+          <text x="504" y="131" text-anchor="middle" fill="#c9ced4" font-size="10.5" font-weight="600" letter-spacing="1">PENDING</text>
+
+          <rect x="28" y="184" width="544" height="74" rx="12" fill="#1a1f26" stroke="#252b33" />
+          <rect x="46" y="198" width="34" height="34" rx="8" fill="#2a3139" />
+          <text x="63" y="220" text-anchor="middle" fill="#ff6b4a" font-size="12" font-weight="700" font-family="Sora, Arial, sans-serif">NX</text>
+          <text x="92" y="218" fill="#edeae3" font-size="14.5" font-weight="600">Data Analyst</text>
+          <text x="92" y="236" fill="#9aa3ad" font-size="12">NEXA Labs · Onsite · Makati</text>
+          <rect x="452" y="198" width="104" height="22" rx="11" fill="#ffffff14" stroke="#ffffff29" />
+          <text x="504" y="213" text-anchor="middle" fill="#c9ced4" font-size="10.5" font-weight="600" letter-spacing="1">INTERVIEW</text>
+
+          <rect x="28" y="266" width="544" height="74" rx="12" fill="#1a1f26" stroke="#252b33" />
+          <rect x="46" y="280" width="34" height="34" rx="8" fill="#2a3139" />
+          <text x="63" y="302" text-anchor="middle" fill="#ff6b4a" font-size="12" font-weight="700" font-family="Sora, Arial, sans-serif">SA</text>
+          <text x="92" y="300" fill="#edeae3" font-size="14.5" font-weight="600">UI/UX Design Intern</text>
+          <text x="92" y="318" fill="#9aa3ad" font-size="12">Studio Alva · Hybrid · Quezon City</text>
+          <rect x="452" y="280" width="104" height="22" rx="11" fill="#c93c13" />
+          <text x="504" y="295" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="700" letter-spacing="1">OFFERED</text>
+        </g>
+
+        <g font-family="Arial, sans-serif">
+          <rect x="28" y="352" width="168" height="80" rx="12" fill="#1a1f26" stroke="#252b33" />
+          <text x="44" y="386" fill="#ff6b4a" font-size="24" font-weight="700" font-family="Sora, Arial, sans-serif">3</text>
+          <text x="44" y="408" fill="#9aa3ad" font-size="11.5">Active applications</text>
+
+          <rect x="216" y="352" width="168" height="80" rx="12" fill="#1a1f26" stroke="#252b33" />
+          <text x="232" y="386" fill="#edeae3" font-size="24" font-weight="700" font-family="Sora, Arial, sans-serif">2</text>
+          <text x="232" y="408" fill="#9aa3ad" font-size="11.5">Interviews this week</text>
+
+          <rect x="404" y="352" width="168" height="80" rx="12" fill="#1a1f26" stroke="#252b33" />
+          <text x="420" y="386" fill="#edeae3" font-size="24" font-weight="700" font-family="Sora, Arial, sans-serif">65%</text>
+          <text x="420" y="408" fill="#9aa3ad" font-size="11.5">Background match score</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+const studentFeatures = [
+  "One profile that doubles as your application — no more re-typing the same form.",
+  "See which roles you genuinely match before you apply, not after.",
+  "Track every application with live statuses, not silence.",
+];
+
+const employerFeatures = [
+  "Post a role once and receive a shortlist of students who already clear your requirements.",
+  "Review profile, skills, and projects in a single view.",
+  "Shortlist, interview, and decide without reading hundreds of resumes.",
+];
+
+function GraduationCapIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 10 12 5 2 10l10 5 10-5Z" />
+      <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5" />
+      <path d="M22 10v6" />
+    </svg>
+  );
+}
+
+function BuildingIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 21h18" />
+      <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
+      <path d="M9 7h.01M15 7h.01M9 11h.01M15 11h.01M9 15h.01M15 15h.01" />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z" />
+      <path d="m9 11 2 2 4-4" />
+    </svg>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  );
+}
+
+function DeviceIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="6" y="3" width="12" height="18" rx="2" />
+      <path d="M10 17h4" />
+    </svg>
+  );
+}
+
+const sampleQuotes = [
+  {
+    initials: "AD",
+    name: "A. Dizon",
+    role: "Computer Science Student, De La Salle University",
+    quote:
+      "I had applied to nine internships on my own and heard back from two. One complete InternMatch profile got me into three first-round interviews in a week.",
+  },
+  {
+    initials: "MC",
+    name: "M. Cruz",
+    role: "Hiring Manager, TechNexa",
+    quote:
+      "We stopped reading resumes for junior roles. The shortlist let our team review twelve qualified students in a single afternoon instead of over a month.",
+  },
+  {
+    initials: "JS",
+    name: "J. Santos",
+    role: "Career Services Lead, Mapúa University",
+    quote:
+      "The prep lab and career-readiness checklist moved our students from \u201Cno experience yet\u201D to interview-ready within one semester.",
+  },
+];
 
 export default function Home() {
   const { loginWithOAuth, isAuthenticated, currentUser } = useContext(AuthContext);
@@ -88,108 +236,179 @@ export default function Home() {
   return (
     <div className="home-container">
       <Navbar />
-      
-      <main className="main-content">
-        <section className="hero-section">
-          <div className="hero-content">
-            <div className="hero-badge">🚀 The Future of Internships</div>
-            <h1 className="hero-title">
-              Find the Right <span className="gradient-text">Internship</span>, Faster.
+
+      <main className="landing-main">
+        <section className="landing-hero" aria-labelledby="landing-hero-title" aria-describedby="landing-hero-subtitle">
+          <div className="landing-hero-copy">
+            <p className="landing-eyebrow">Internship matching platform</p>
+            <h1 className="landing-title" id="landing-hero-title">
+              InternMatch pairs students with{" "}
+              <span className="landing-emphasis">internships</span> and employers
+              with <span className="landing-emphasis">vetted talent</span>.
             </h1>
-            <p className="hero-subtitle">
-              InternMatch connects top-tier students with industry-leading companies 
-              offering meaningful internship opportunities. Your career starts here.
+            <p className="landing-subtitle" id="landing-hero-subtitle">
+              Students build one profile, mark the skills they have, and get
+              matched to open roles. Employers post once and receive a shortlist
+              of students who already clear their requirements.
             </p>
-            <div className="hero-cta">
-              <a href="/register" className="primary-btn-large">Start for Free</a>
-              <a href="/login" className="secondary-btn-large">Learn More →</a>
+
+            <div className="landing-cta">
+              <Link to="/register" className="landing-btn landing-btn--primary">
+                Create your profile
+              </Link>
+              <a href="#features" className="landing-btn landing-btn--ghost">
+                Explore features
+              </a>
             </div>
-            <div className="hero-stats">
-              <div className="stat-item">
-                <strong>5k+</strong>
-                <span>Active Students</span>
+
+            <dl className="landing-stats">
+              <div className="landing-stat">
+                <dt>Active students</dt>
+                <dd>5,000+</dd>
               </div>
-              <div className="stat-item">
-                <strong>200+</strong>
-                <span>Companies</span>
+              <div className="landing-stat">
+                <dt>Posting employers</dt>
+                <dd>200+</dd>
               </div>
-            </div>
+              <div className="landing-stat">
+                <dt>Shortlist-to-interview match</dt>
+                <dd>65%</dd>
+              </div>
+            </dl>
           </div>
-          <div className="hero-visual">
-            <div className="visual-card main-visual">
-              <div className="visual-header">
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
+
+          <DashboardMockup />
+        </section>
+
+        <section className="landing-features" id="features" aria-labelledby="landing-features-title">
+          <header className="landing-section-head">
+            <h2 id="landing-features-title">What it does</h2>
+            <p>
+              InternMatch handles the matching so students stop spamming generic
+              forms and employers stop reading thousands of resumes.
+            </p>
+          </header>
+
+          <div className="landing-feature-grid">
+            <article className="landing-feature-card">
+              <div className="landing-feature-icon" aria-hidden="true">
+                <GraduationCapIcon />
               </div>
-              <div className="visual-content">
-                <div className="visual-skeleton header-skeleton"></div>
-                <div className="visual-grid-skeleton">
-                  <div className="visual-skeleton item-skeleton"></div>
-                  <div className="visual-skeleton item-skeleton"></div>
-                  <div className="visual-skeleton item-skeleton"></div>
-                </div>
+              <h3>For students</h3>
+              <ul>
+                {studentFeatures.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="landing-feature-card">
+              <div className="landing-feature-icon" aria-hidden="true">
+                <BuildingIcon />
               </div>
-            </div>
-            <div className="visual-card floating-card-1">✨ New Opportunities</div>
-            <div className="visual-card floating-card-2">📈 High Growth</div>
+              <h3>For employers</h3>
+              <ul>
+                {employerFeatures.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+          </div>
+
+          <ul className="landing-mini-features">
+            <li className="landing-mini">
+              <ShieldIcon />
+              <span>
+                <span className="landing-mini-title">Secure sign-in</span>
+                <span className="landing-mini-description">
+                  JWT sessions with role-based access for students, employers,
+                  and admins.
+                </span>
+              </span>
+            </li>
+            <li className="landing-mini">
+              <ClockIcon />
+              <span>
+                <span className="landing-mini-title">Live statuses</span>
+                <span className="landing-mini-description">
+                  Applications move from pending to accepted or withdrawn with
+                  real-time updates.
+                </span>
+              </span>
+            </li>
+            <li className="landing-mini">
+              <DeviceIcon />
+              <span>
+                <span className="landing-mini-title">Works on any device</span>
+                <span className="landing-mini-description">
+                  Web dashboard, native Android app, and in-app chat with your
+                  matches.
+                </span>
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section className="landing-testimonials" aria-labelledby="landing-testimonials-title">
+          <header className="landing-section-head">
+            <h2 id="landing-testimonials-title">Results, not promises</h2>
+            <p>
+              These are sample stories. We will replace them with real,
+              attributed feedback from students, employers, and university
+              partners.
+            </p>
+          </header>
+
+          <div className="landing-quotes">
+            {sampleQuotes.map((quote) => (
+              <figure className="landing-quote" key={quote.name}>
+                <blockquote>{quote.quote}</blockquote>
+                <figcaption>
+                  <span className="landing-quote-avatar" aria-hidden="true">
+                    {quote.initials}
+                  </span>
+                  <span className="landing-quote-id">
+                    <span className="landing-quote-name">{quote.name}</span>
+                    <span className="landing-quote-role">{quote.role}</span>
+                  </span>
+                </figcaption>
+                <small className="landing-sample">Sample story — replace with real attribution.</small>
+              </figure>
+            ))}
           </div>
         </section>
 
-        <section className="bento-features">
-          <div className="section-header">
-            <h2>Designed for <span className="gradient-text">Success</span></h2>
-            <p>Everything you need to land your dream internship or find top talent.</p>
-          </div>
-          
-          <div className="bento-grid">
-            <div className="bento-card large student-card">
-              <div className="card-icon">🎓</div>
-              <h3>For Students</h3>
-              <p>Build your professional profile, apply to top companies, and track your applications in real-time with our intuitive dashboard.</p>
-              <div className="card-action">Explore Features →</div>
-            </div>
-
-            <div className="bento-card medium employer-card">
-              <div className="card-icon">🏢</div>
-              <h3>For Employers</h3>
-              <p>Post opportunities, manage applicants, and find the perfect match for your team with ease.</p>
-              <div className="card-action">Hire Talent →</div>
-            </div>
-
-            <div className="bento-card small secure-card">
-              <div className="card-icon">🔐</div>
-              <h3>Secure System</h3>
-              <p>Industry-standard JWT authentication and role-based access control.</p>
-            </div>
-
-            <div className="bento-card small fast-card">
-              <div className="card-icon">⚡</div>
-              <h3>Lightning Fast</h3>
-              <p>Real-time notifications and instant updates on your application status.</p>
-            </div>
-
-            <div className="bento-card small global-card">
-              <div className="card-icon">🌍</div>
-              <h3>Global Reach</h3>
-              <p>Connect with companies from across the globe, remotely or in-person.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="cta-banner">
-          <div className="cta-content">
-            <h2>Ready to <span className="gradient-text">Kickstart</span> Your Career?</h2>
-            <p>Join thousands of students and employers already using InternMatch.</p>
-            <div className="cta-actions">
-              <a href="/register" className="primary-btn-large">Get Started Now</a>
-            </div>
-          </div>
+        <section className="landing-cta-band" aria-labelledby="landing-cta-title">
+          <h2 id="landing-cta-title">Start matching today</h2>
+          <p>
+            Students: build a profile in five minutes. Employers: post a role
+            and get your shortlist tomorrow.
+          </p>
+          <Link to="/register" className="landing-btn landing-btn--primary">
+            Get started
+          </Link>
         </section>
       </main>
 
-      <footer className="simple-footer">
-        <p>&copy; 2026 InternMatch. Built for the next generation of builders.</p>
+      <footer className="landing-footer">
+        <div className="landing-footer-top">
+          <div className="landing-footer-brand">
+            <h2 className="landing-footer-logo">InternMatch</h2>
+            <p className="landing-footer-tagline">
+              The internship matching platform for students and employers.
+            </p>
+          </div>
+
+          <nav aria-label="Footer">
+            <a href="#features">Features</a>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Get started</Link>
+          </nav>
+        </div>
+
+        <p className="landing-footer-copy">
+          &copy; 2026 InternMatch. Built for the next generation of builders.
+        </p>
       </footer>
     </div>
   );

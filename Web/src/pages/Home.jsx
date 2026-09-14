@@ -151,28 +151,10 @@ function DeviceIcon() {
   );
 }
 
-const sampleQuotes = [
-  {
-    initials: "AD",
-    name: "A. Dizon",
-    role: "Computer Science Student, De La Salle University",
-    quote:
-      "I had applied to nine internships on my own and heard back from two. One complete InternMatch profile got me into three first-round interviews in a week.",
-  },
-  {
-    initials: "MC",
-    name: "M. Cruz",
-    role: "Hiring Manager, TechNexa",
-    quote:
-      "We stopped reading resumes for junior roles. The shortlist let our team review twelve qualified students in a single afternoon instead of over a month.",
-  },
-  {
-    initials: "JS",
-    name: "J. Santos",
-    role: "Career Services Lead, Mapúa University",
-    quote:
-      "The prep lab and career-readiness checklist moved our students from \u201Cno experience yet\u201D to interview-ready within one semester.",
-  },
+const miniFeatures = [
+  { title: "Secure sign-in", description: "JWT sessions with role-based access for students, employers, and admins.", Icon: ShieldIcon },
+  { title: "Live statuses", description: "Applications move from pending to accepted or withdrawn with real-time updates.", Icon: ClockIcon },
+  { title: "Works on any device", description: "Web dashboard, native Android app, and in-app chat with your matches.", Icon: DeviceIcon },
 ];
 
 export default function Home() {
@@ -316,66 +298,16 @@ export default function Home() {
           </div>
 
           <ul className="landing-mini-features">
-            <li className="landing-mini">
-              <ShieldIcon />
-              <span>
-                <span className="landing-mini-title">Secure sign-in</span>
-                <span className="landing-mini-description">
-                  JWT sessions with role-based access for students, employers,
-                  and admins.
+            {miniFeatures.map(({ title, description, Icon }) => (
+              <li className="landing-mini" key={title}>
+                <Icon />
+                <span>
+                  <span className="landing-mini-title">{title}</span>
+                  <span className="landing-mini-description">{description}</span>
                 </span>
-              </span>
-            </li>
-            <li className="landing-mini">
-              <ClockIcon />
-              <span>
-                <span className="landing-mini-title">Live statuses</span>
-                <span className="landing-mini-description">
-                  Applications move from pending to accepted or withdrawn with
-                  real-time updates.
-                </span>
-              </span>
-            </li>
-            <li className="landing-mini">
-              <DeviceIcon />
-              <span>
-                <span className="landing-mini-title">Works on any device</span>
-                <span className="landing-mini-description">
-                  Web dashboard, native Android app, and in-app chat with your
-                  matches.
-                </span>
-              </span>
-            </li>
-          </ul>
-        </section>
-
-        <section className="landing-testimonials" aria-labelledby="landing-testimonials-title">
-          <header className="landing-section-head">
-            <h2 id="landing-testimonials-title">Results, not promises</h2>
-            <p>
-              These are sample stories. We will replace them with real,
-              attributed feedback from students, employers, and university
-              partners.
-            </p>
-          </header>
-
-          <div className="landing-quotes">
-            {sampleQuotes.map((quote) => (
-              <figure className="landing-quote" key={quote.name}>
-                <blockquote>{quote.quote}</blockquote>
-                <figcaption>
-                  <span className="landing-quote-avatar" aria-hidden="true">
-                    {quote.initials}
-                  </span>
-                  <span className="landing-quote-id">
-                    <span className="landing-quote-name">{quote.name}</span>
-                    <span className="landing-quote-role">{quote.role}</span>
-                  </span>
-                </figcaption>
-                <small className="landing-sample">Sample story — replace with real attribution.</small>
-              </figure>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
         <section className="landing-cta-band" aria-labelledby="landing-cta-title">
@@ -391,19 +323,11 @@ export default function Home() {
       </main>
 
       <footer className="landing-footer">
-        <div className="landing-footer-top">
-          <div className="landing-footer-brand">
-            <h2 className="landing-footer-logo">InternMatch</h2>
-            <p className="landing-footer-tagline">
-              The internship matching platform for students and employers.
-            </p>
-          </div>
-
-          <nav aria-label="Footer">
-            <a href="#features">Features</a>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Get started</Link>
-          </nav>
+        <div className="landing-footer-brand">
+          <h2 className="landing-footer-logo">InternMatch</h2>
+          <p className="landing-footer-tagline">
+            The internship matching platform for students and employers.
+          </p>
         </div>
 
         <p className="landing-footer-copy">

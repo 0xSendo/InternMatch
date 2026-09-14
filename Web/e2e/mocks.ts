@@ -62,6 +62,24 @@ export const MOCK_EMPLOYER_INTEREST = {
   ],
 };
 
+export const MOCK_MARKET_OVERVIEW = {
+  postingTrend: [
+    { month: 'Jul', postings: 9, applications: 24 },
+    { month: 'Aug', postings: 14, applications: 41 },
+    { month: 'Sep', postings: 18, applications: 60 },
+  ],
+  setupSplit: [
+    { setup: 'Hybrid', postings: 9 },
+    { setup: 'Remote', postings: 6 },
+    { setup: 'Onsite', postings: 3 },
+  ],
+  locationSplit: [{ location: 'Makati', postings: 12 }],
+  topEmployers: [{ company: 'ACME Corp', postings: 4, applications: 9 }],
+  totalPostings: 18,
+  activePostings: 18,
+  lastUpdated: '2026-09-13T00:00:00',
+};
+
 export const MOCK_INTERNSHIPS = [
   {
     id: 1,
@@ -126,6 +144,9 @@ export async function mockStats(page: Page) {
   });
   await page.route('**/api/v1/stats/employer-interest', async (route) => {
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_EMPLOYER_INTEREST) });
+  });
+  await page.route('**/api/v1/stats/market-overview', async (route) => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_MARKET_OVERVIEW) });
   });
 }
 

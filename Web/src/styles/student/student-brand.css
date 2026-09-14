@@ -1,0 +1,548 @@
+/* ==================== STUDENT DASHBOARD BRAND (ink/coral) ====================
+   Content-only, ink-tinted route: Navbar, Sidebar and shared notifications
+   modal stay navy. Every rule is scoped under .student-dashboard-root or
+   body.student-ink so StudentFeed and ProfileBuilder (which also import
+   student-dashboard.css) are unaffected.
+============================================================================== */
+
+/* --- Ink chrome for the whole page while the student dashboard is mounted --- */
+body.student-ink {
+  --bg: #0f1217;
+  background-color: #0f1217;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(255, 107, 74, 0.1), transparent 20%),
+    radial-gradient(circle at 88% 18%, rgba(255, 107, 74, 0.06), transparent 24%);
+  color: #edeae3;
+  color-scheme: dark;
+}
+
+body.student-ink ::selection {
+  background: rgba(255, 107, 74, 0.35);
+}
+
+body.student-ink::-webkit-scrollbar,
+.student-dashboard-root::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.student-ink::-webkit-scrollbar-thumb,
+.student-dashboard-root::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 100px;
+}
+
+body.student-ink::-webkit-scrollbar-thumb:hover,
+.student-dashboard-root::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+body.student-ink::-webkit-scrollbar-track,
+.student-dashboard-root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --- Brand tokens (root-scoped; beats body.light-theme when both apply) --- */
+.student-dashboard-root,
+body.light-theme .student-dashboard-root,
+body.student-ink .student-dashboard-root {
+  --bg: #0f1217;
+  --surface: #171b21;
+  --card-bg: #171b21;
+  --muted: #a8aeb6;
+  --text: #edeae3;
+  --primary: #ff6b4a;
+  --primary-600: #f0552f;
+  --glass: rgba(255, 255, 255, 0.07);
+
+  --dash-ink: #0f1217;
+  --dash-surface: #171b21;
+  --dash-border: rgba(255, 255, 255, 0.09);
+  --dash-primary: #ff6b4a;
+  --dash-btn: #c93c13;
+  --dash-btn-hover: #b53610;
+  --dash-glass: rgba(255, 255, 255, 0.05);
+  --dash-text: #edeae3;
+  --dash-muted: #a8aeb6;
+  --dash-strong: #ffffff;
+  --dash-focus: #b34322;
+
+  color: var(--dash-text);
+}
+
+/* --- Hero --- */
+.student-dashboard-root .student-hero {
+  background: linear-gradient(135deg, #171b21 0%, #10141a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.student-dashboard-root .hero-aurora-bg .blob.one {
+  background: #ff6b4a;
+}
+
+.student-dashboard-root .hero-aurora-bg .blob.two {
+  background: rgba(255, 107, 74, 0.45);
+}
+
+/* --- Bento cards --- */
+.student-dashboard-root .bento-card {
+  background: var(--dash-surface);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.student-dashboard-root .bento-card:hover {
+  border-color: rgba(255, 107, 74, 0.35);
+}
+
+.student-dashboard-root .summary-stat-glass {
+  border-color: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.student-dashboard-root .summary-stat-glass.primary {
+  background: rgba(255, 107, 74, 0.14);
+  border-color: rgba(255, 107, 74, 0.3);
+}
+
+/* --- Profile bento helpers --- */
+.student-dashboard-root .mini-item.spaced {
+  margin-top: 12px;
+}
+
+.student-dashboard-root .detail-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.student-dashboard-root .no-skills-note {
+  font-size: 0.85rem;
+  color: var(--dash-muted);
+}
+
+.student-dashboard-root .resume-link-pro {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  background: rgba(255, 107, 74, 0.1);
+  border: 1px solid rgba(255, 107, 74, 0.25);
+}
+
+.student-dashboard-root .completion-track-wrap {
+  width: 100%;
+}
+
+.student-dashboard-root .completion-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.student-dashboard-root .completion-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--dash-muted);
+}
+
+.student-dashboard-root .completion-value {
+  font-size: 0.9rem;
+  color: var(--dash-primary);
+}
+
+.student-dashboard-root .completion-track {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.student-dashboard-root .completion-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--dash-primary), #ff9a78);
+  border-radius: 10px;
+  transition: width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* --- Section labels --- */
+.student-dashboard-root .section-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--dash-primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.student-dashboard-root .section-label.muted {
+  color: var(--dash-muted);
+}
+
+/* --- Connections --- */
+.student-dashboard-root .pending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.student-dashboard-root .requester-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.student-dashboard-root .requester-role {
+  font-size: 0.7rem;
+  color: var(--dash-muted);
+  margin: 0;
+}
+
+.student-dashboard-root .request-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.student-dashboard-root .friends-preview .friends-avatars {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.student-dashboard-root .friends-preview .friends-empty {
+  font-size: 0.8rem;
+  color: var(--dash-muted);
+  font-style: italic;
+}
+
+.student-dashboard-root .friend-avatar-circle {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--dash-primary), #ff9a78);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Mini buttons (accept / decline / withdraw) --- */
+.student-dashboard-root .mini-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--dash-muted);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.student-dashboard-root .mini-btn:hover {
+  transform: translateY(-1px);
+}
+
+.student-dashboard-root .mini-btn.accept {
+  background: var(--dash-btn);
+  border-color: var(--dash-btn);
+  color: #fff;
+}
+
+.student-dashboard-root .mini-btn.accept:hover {
+  background: var(--dash-btn-hover);
+  border-color: var(--dash-btn-hover);
+}
+
+.student-dashboard-root .mini-btn.decline {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.student-dashboard-root .mini-btn.decline:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--dash-text);
+}
+
+.student-dashboard-root .mini-btn.danger:hover {
+  background: rgba(255, 107, 74, 0.14);
+  border-color: rgba(255, 107, 74, 0.4);
+  color: var(--dash-primary);
+}
+
+/* --- Application cards --- */
+.student-dashboard-root .bento-app-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.student-dashboard-root .bento-app-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--dash-primary);
+}
+
+.student-dashboard-root .app-title-sm {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.student-dashboard-root .app-company-mini {
+  font-size: 0.85rem;
+  color: var(--dash-muted);
+}
+
+.student-dashboard-root .app-footer-mini {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.student-dashboard-root .app-footer-mini .app-date {
+  font-size: 0.75rem;
+  color: var(--dash-muted);
+}
+
+/* --- Status tags --- */
+.student-dashboard-root .status-tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--dash-muted);
+}
+
+.student-dashboard-root .status-tag.pending {
+  background: rgba(255, 214, 102, 0.14);
+  color: #ffd666;
+}
+
+.student-dashboard-root .status-tag.accepted {
+  background: rgba(57, 198, 184, 0.14);
+  color: #39c6b8;
+}
+
+.student-dashboard-root .status-tag.rejected {
+  background: rgba(255, 99, 99, 0.14);
+  color: #ff8a8a;
+}
+
+.student-dashboard-root .status-tag.withdrawn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--dash-muted);
+}
+
+.student-dashboard-root .status-tag-v2 {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--dash-text);
+}
+
+.student-dashboard-root .status-tag-v2.pending {
+  background: rgba(255, 214, 102, 0.14);
+  color: #ffd666;
+}
+
+.student-dashboard-root .status-tag-v2.accepted {
+  background: rgba(57, 198, 184, 0.14);
+  color: #39c6b8;
+}
+
+.student-dashboard-root .status-tag-v2.rejected {
+  background: rgba(255, 99, 99, 0.14);
+  color: #ff8a8a;
+}
+
+.student-dashboard-root .status-tag-v2.withdrawn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--dash-muted);
+}
+
+/* --- Empty states --- */
+.student-dashboard-root .market-status-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+
+.student-dashboard-root .market-status-overlay .insight-text {
+  margin: 0;
+  color: var(--dash-muted);
+  font-size: 0.9rem;
+}
+
+/* --- Filters --- */
+.student-dashboard-root .app-filters-mini input,
+.student-dashboard-root .app-filters-mini select {
+  background: var(--dash-surface);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.student-dashboard-root .app-filters-mini select option {
+  background: #171b21;
+  color: var(--dash-text);
+}
+
+/* --- Buttons (glass) --- */
+.student-dashboard-root .edit-btn-glass {
+  background: var(--dash-glass, rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--dash-primary);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.student-dashboard-root .edit-btn-glass:hover {
+  background: rgba(255, 107, 74, 0.12);
+  border-color: rgba(255, 107, 74, 0.4);
+  transform: translateY(-1px);
+}
+
+.student-dashboard-root .close-btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: var(--dash-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  flex-shrink: 0;
+}
+
+.student-dashboard-root .close-btn-glass:hover {
+  color: var(--dash-strong);
+  background: rgba(255, 107, 74, 0.14);
+  border-color: rgba(255, 107, 74, 0.4);
+}
+
+/* --- Modals (ink) --- */
+.student-dashboard-root .modal-content {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.student-dashboard-root .profile-modal-pro,
+.student-dashboard-root .application-modal-pro {
+  background: #171b21;
+}
+
+.student-dashboard-root .modal-header-pro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.student-dashboard-root .modal-header-pro h3 {
+  margin: 0;
+}
+
+.student-dashboard-root .modal-aurora-glow {
+  background: radial-gradient(circle, rgba(255, 107, 74, 0.1) 0%, transparent 70%);
+}
+
+.student-dashboard-root .modal-aurora-glow.secondary {
+  background: radial-gradient(circle, rgba(255, 107, 74, 0.08) 0%, transparent 70%);
+}
+
+.student-dashboard-root .note-box-pro {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+  color: var(--dash-text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.student-dashboard-root .btn-primary-pro {
+  background: var(--dash-btn);
+  box-shadow: 0 8px 20px rgba(255, 107, 74, 0.22);
+}
+
+.student-dashboard-root .btn-primary-pro:hover {
+  background: var(--dash-btn-hover);
+  box-shadow: 0 12px 28px rgba(255, 107, 74, 0.3);
+}
+
+.student-dashboard-root .btn-secondary-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* --- Friends / network modal --- */
+.student-dashboard-root .friends-list-full {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.student-dashboard-root .network-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--dash-muted);
+}
+
+.student-dashboard-root .network-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.student-dashboard-root .network-avatar {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--dash-primary), #ff9a78);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.student-dashboard-root .network-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.student-dashboard-root .network-info h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.student-dashboard-root .network-role {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--dash-primary);
+  font-weight: 600;
+}
+
+.student-dashboard-root .network-meta {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: var(--dash-muted);
+}
+
+.student-dashboard-root .network-chat-btn {
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}

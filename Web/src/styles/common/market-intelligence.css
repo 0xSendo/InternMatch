@@ -1,0 +1,314 @@
+/* ==================== MARKET INTELLIGENCE WIDGET ====================
+   Theme-agnostic: uses only global CSS variables so the widget adapts
+   to the navy and ink dashboard themes alike. Do not use --dash-* here.
+======================================================================== */
+
+.mi-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.mi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.mi-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.mi-sub {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.mi-sub strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.mi-sep {
+  margin: 0 3px;
+  opacity: 0.6;
+}
+
+.mi-year {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+.mi-loading {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* KPI strip */
+.mi-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mi-kpi {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mi-kpi .mi-kpi-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.mi-kpi .mi-kpi-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.mi-kpi .mi-kpi-sub {
+  font-size: 0.72rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Panels grid */
+.mi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.mi-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 0;
+}
+
+.mi-panel-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mi-icon-chip {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  background: rgba(255, 107, 74, 0.1);
+}
+
+.mi-panel-head h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.mi-panel-sub {
+  margin: 2px 0 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.mi-chart {
+  width: 100%;
+  height: 190px;
+}
+
+.mi-empty {
+  margin: auto 0;
+  padding: 28px 8px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* Work setup split (HTML bars, no chart lib) */
+.mi-setup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mi-setup-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.mi-setup-head span {
+  font-weight: 600;
+}
+
+.mi-setup-head strong {
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.mi-setup-track {
+  height: 8px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.mi-setup-fill {
+  display: block;
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #ff6b4a, #ff9a78);
+  transition: width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* National context strip */
+.mi-panel-national {
+  grid-column: 1 / -1;
+}
+
+/* Insight callout */
+.mi-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--glass);
+  border: 1px solid rgba(255, 107, 74, 0.25);
+  border-left: 3px solid rgba(255, 107, 74, 0.8);
+}
+
+.mi-callout-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  background: rgba(255, 107, 74, 0.1);
+  margin-top: 1px;
+}
+
+.mi-callout-text {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0.92;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.mi-callout-text .mi-strong {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+/* Recharts tooltip */
+.mi-tooltip {
+  background: rgba(15, 18, 23, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  min-width: 150px;
+}
+
+.mi-tooltip-title {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.mi-tooltip-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mi-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+}
+
+.mi-tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mi-tooltip-name {
+  color: rgba(255, 255, 255, 0.72);
+  flex: 1;
+}
+
+.mi-tooltip-val {
+  color: #fff;
+  font-weight: 800;
+}
+
+@media (max-width: 1200px) {
+  .mi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mi-panel-national {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .mi-kpis {
+    grid-template-columns: 1fr;
+  }
+}

@@ -71,30 +71,38 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container">
+    <main className="auth-container">
       {isLoading && (
-        <div className="auth-loading-overlay">
-          <div className="loader-pulse">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
+        <div className="auth-loading-overlay" aria-live="polite">
+          <div className="auth-spinner" aria-hidden="true" />
           <div className="auth-loading-text">Authenticating...</div>
         </div>
       )}
-      
+
       <div className="auth-card">
-        <h2>Welcome Back 👋</h2>
-        <p>Login to continue your journey</p>
+        <p className="auth-eyebrow">InternMatch</p>
+        <h1 className="auth-title">Welcome back.</h1>
+        <p className="auth-subtitle">Sign in to continue to your dashboard.</p>
 
-        <Link className="auth-back" to="/">← Back to home</Link>
+        <Link className="auth-back" to="/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M19 12H5" />
+            <path d="m12 19-7-7 7-7" />
+          </svg>
+          Back to home
+        </Link>
 
-        <form onSubmit={onSubmit}>
+        <form className="auth-form" onSubmit={onSubmit}>
           <div className="form-group">
-            <label>Email Address</label>
+            <label htmlFor="login-email">Email Address</label>
             <input
+              id="login-email"
+              className="auth-input"
               type="email"
               placeholder="Enter your email"
+              autoComplete="email"
+              autoCapitalize="off"
+              spellCheck="false"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -102,26 +110,33 @@ export default function Login() {
           </div>
 
           <div className="form-group">
-            <label>Password</label>
+            <label htmlFor="login-password">Password</label>
             <input
+              id="login-password"
+              className="auth-input"
               type="password"
               placeholder="Enter your password"
+              autoComplete="current-password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          <button type="submit" className="primary-btn">Sign In</button>
+          <button type="submit" className="auth-submit">Sign In</button>
         </form>
 
-        {error && <div className="auth-feedback auth-feedback--error">{error}</div>}
-        {success && <div className="auth-feedback auth-feedback--success">{success}</div>}
+        {error && (
+          <p className="auth-feedback auth-feedback--error" role="status">{error}</p>
+        )}
+        {success && (
+          <p className="auth-feedback auth-feedback--success" role="status">{success}</p>
+        )}
 
         <div className="auth-divider"><span>or</span></div>
 
-        <button type="button" className="google-btn" onClick={handleGoogleLogin}>
-          <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <button type="button" className="auth-google" onClick={handleGoogleLogin}>
+          <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
             <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
             <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
@@ -131,10 +146,10 @@ export default function Login() {
           Continue with Google
         </button>
 
-        <span className="auth-footer">
+        <p className="auth-footer">
           Don't have an account? <Link to="/register">Create one</Link>
-        </span>
+        </p>
       </div>
-    </div>
+    </main>
   );
 }

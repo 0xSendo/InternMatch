@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import "../styles/auth.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8081";
 
@@ -102,8 +103,9 @@ export default function OAuthCallback() {
   }, [location, navigate, loginWithOAuth]);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <h2>Completing login...</h2>
+    <div className="auth-loading-overlay">
+      <div className="auth-spinner" aria-hidden="true" />
+      <div className="auth-loading-text">Completing login...</div>
     </div>
   );
 }

@@ -323,15 +323,8 @@ export default function Home() {
       </main>
 
       <footer className="landing-footer">
-        <div className="landing-footer-brand">
-          <h2 className="landing-footer-logo">InternMatch</h2>
-          <p className="landing-footer-tagline">
-            The internship matching platform for students and employers.
-          </p>
-        </div>
-
         <p className="landing-footer-copy">
-          &copy; 2026 InternMatch. Built for the next generation of builders.
+          &copy; 2026 InternMatch. All rights reserved.
         </p>
       </footer>
     </div>

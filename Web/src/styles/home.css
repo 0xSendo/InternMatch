@@ -356,33 +356,19 @@
 /* ---------- Footer ---------- */
 
 .landing-footer {
+  display: flex;
+  justify-content: center;
   border-top: 1px solid var(--landing-border);
-  padding: 2.5rem 0 3rem;
-}
-
-.landing-footer-logo {
-  margin: 0 0 0.4rem;
-  font-family: var(--font-head);
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--landing-strong);
-}
-
-.landing-footer-tagline {
-  margin: 0;
-  color: var(--landing-muted);
-  font-size: 0.9rem;
-  max-width: 40ch;
-  line-height: 1.55;
+  padding: 2rem 1.25rem;
+  margin-top: 1rem;
 }
 
 .landing-footer-copy {
   margin: 0;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--landing-border);
   color: var(--landing-muted);
   font-size: 0.85rem;
   line-height: 1.5;
+  text-align: center;
 }
 
 /* ---------- Responsive (mobile-first) ---------- */

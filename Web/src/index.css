@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap");
 
 * {
   box-sizing: border-box;
@@ -6,6 +6,8 @@
 
 :root {
   --font-sans: "Sora", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-head: "Sora", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
   --radius: 12px;
   --container-width: 1100px;
 
@@ -54,6 +56,20 @@ body {
     radial-gradient( circle at 12% 8%, rgba(255,107,74,0.12), transparent 18% ),
     radial-gradient( circle at 88% 18%, rgba(57,198,184,0.12), transparent 22% ),
     radial-gradient( circle at 18% 88%, rgba(255,214,102,0.12), transparent 20% );
+}
+
+/* Accessible focus indicator (darker coral, >= 3:1 on ink and white) */
+:focus-visible {
+  outline: 2px solid #b34322;
+  outline-offset: 3px;
+}
+
+/* Brand accent heading highlight (shared; keep definitions global) */
+.gradient-text {
+  background: var(--accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Utility */

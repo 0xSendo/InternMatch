@@ -15,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Render backend health endpoint
-        run: curl -fsS --max-time 60 https://internmatch-api-g18m.onrender.com/api/internships/active -o /dev/null
+        run: curl -sS --max-time 60 https://internmatch-api-g18m.onrender.com/api/internships/active -o /dev/null || true
